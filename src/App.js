@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ListEmployee from "./components/ListEmployee";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CreateEmployee from "./components/CreateEmployee";
+import UpdateEmployee from "./components/UpdateEmployee";
+import ViewEmployee from "./components/ViewEmployee";
 
+//react functional component
+//jsx javascript xml code extension of javascript
+//root component we confugure routing here
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router> 
+      {/* header and footer are outside the switch  */}
+        
+          <Header />
+          <div className="container">
+          {/* inside the switch we configure the routing  */}
+          {/* http://localhost:3000/employees  */}
+            <Routes>   
+            <Route path="/" exact Component={ListEmployee}></Route>
+            <Route path="/employees" Component={ListEmployee}></Route>
+            <Route path="/add-employee" Component={CreateEmployee}></Route>
+            <Route path="/view-employees/:id" Component={ViewEmployee}></Route>
+
+            {/*  step1:  <Route path="/update-employee/:id" Component={UpdateEmployee}> </Route> */}
+            
+            </Routes>
+          </div>
+          <Footer />
+    
+      </Router>
+    </>
   );
 }
 
