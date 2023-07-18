@@ -1,3 +1,9 @@
+//git commands
+//git add .
+//git commit -m "react js spring boot crud applicatio"
+// git push -u origin main 
+// git status
+
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ListEmployee from "./components/ListEmployee";
@@ -21,12 +27,12 @@ function App() {
           {/* inside the switch we configure the routing  */}
           {/* http://localhost:3000/employees  */}
             <Routes>   
-            <Route path="/" exact Component={ListEmployee}></Route>
+            <Route path="/" Component={ListEmployee}></Route>
             <Route path="/employees" Component={ListEmployee}></Route>
             <Route path="/add-employee" Component={CreateEmployee}></Route>
-            <Route path="/view-employees/:id" Component={ViewEmployee}></Route>
+            <Route path="/update-employee/:id" Component={UpdateEmployee}> </Route> 
+            <Route path="/view-employee/:id" Component={ViewEmployee}></Route>
 
-            {/*  step1:  <Route path="/update-employee/:id" Component={UpdateEmployee}> </Route> */}
             
             </Routes>
           </div>

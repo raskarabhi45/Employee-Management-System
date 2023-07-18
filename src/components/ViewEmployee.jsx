@@ -1,47 +1,45 @@
-import React, { Component } from "react";
-import EmployeeService from "../services/EmployeeService";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import EmployeeService from '../services/EmployeeService';
+import "../App.css";
+const ViewEmployeeComponent = () => {
+  const { id } = useParams();
+  const [employee, setEmployee] = useState({});
 
-export default class ViewEmployee extends Component {
-  constructor(props) {
-    super(props);
+  useEffect(() => {
+    EmployeeService.getEmployeeById(id)
+      .then((res) => {
+        setEmployee(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
 
-    this.state = {
-      id: this.props.match.params.id,
-      employee: {},
-    };
-  }
-
-  //to make rest api call
-  //this method gets called when component is mounted
-  componentDidMount() {
-    EmployeeService.getEmployeeById(this.state.id).then((res) => {
-      this.setState({ employee: res.data });
-    });
-  }
-
-  render() {
-    return (
-      <>
-        <div>
-          <div className="card col-md-6 offset-md-3">
-            <h3 className="text-center">View Employee Details</h3>
-            <div className="card-body">
-              <div className="row">
-                <label> Employee First Name :</label>
-                <div>{this.state.employee.firstName}</div>
-              </div>
-              <div className="row">
-                <label> Employee Last Name :</label>
-                <div>{this.state.employee.lastName}</div>
-              </div>
-              <div className="row">
-                <label> Employee Email Id :</label>
-                <div>{this.state.employee.emailId}</div>
-              </div>
-            </div>
+  return (
+    <div>
+      <br />
+      <div className='view'>
+      <div className="card col-md-6 offset-md-3">
+        <h3 className="text-center">View Employee Details</h3>
+        <div className="card-body">
+          <div className="row">
+            <label>Employee First Name:</label>
+            <div>{employee.firstName}</div>
+          </div>
+          <div className="row">
+            <label>Employee Last Name:</label>
+            <div>{employee.lastName}</div>
+          </div>
+          <div className="row">
+            <label>Employee Email ID:</label>
+            <div>{employee.emailId}</div>
           </div>
         </div>
-      </>
-    );
-  }
-}
+      </div>
+    </div>
+    </div>
+  );
+};
+
+export default ViewEmployeeComponent;
