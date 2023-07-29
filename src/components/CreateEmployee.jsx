@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import ListEmployee from "./ListEmployee";
 import { useNavigate } from 'react-router-dom';
-
+import "./add_update.css"
 import EmployeeService from "../services/EmployeeService";
 
 const CreateEmployee = () => {
+
+  
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
+  const [age, setAge] = useState("");
+  const [city, setCity] = useState("");
+  const [salary, setSalary] = useState("");
+
 
   // useEffect(() => {
   //     EmployeeService.getEmployeeById(id).then((res) => {
@@ -34,12 +39,29 @@ const CreateEmployee = () => {
     setEmailId(event.target.value);
   };
 
+  const changeAgeHandler = (event) => {
+    setAge(event.target.value);
+  };
+
+  const changeCityHandler = (event) => {
+    setCity(event.target.value);
+  };
+
+  const changeSalaryHandler = (event) => {
+    setSalary(event.target.value);
+  };
+
+
+
   const saveEmployee = (e) => {
     e.preventDefault();
     let employee = {
       firstName,
       lastName,
       emailId,
+      age,
+      city,
+      salary,
     };
     console.log("employee=>" + JSON.stringify(employee));
 
@@ -58,6 +80,8 @@ const CreateEmployee = () => {
 
   return (
     <>
+    <div className="mainContainer">
+
       <div className="container">
         <div className="row">
           <div className="card col-md-6 offset-md-3 offset-md-3">
@@ -101,6 +125,42 @@ const CreateEmployee = () => {
                   />
                 </div>
 
+                <div className="form-group">
+                  <label>Age :</label>
+                  <input
+                    type="text"
+                    placeholder="Age"
+                    name="age"
+                    className="form-control"
+                    value={age}
+                    onChange={changeAgeHandler}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>City :</label>
+                  <input
+                    type="text"
+                    placeholder="City"
+                    name="city"
+                    className="form-control"
+                    value={city}
+                    onChange={changeCityHandler}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Salary :</label>
+                  <input
+                    type="text"
+                    placeholder="Salary"
+                    name="salary"
+                    className="form-control"
+                    value={salary}
+                    onChange={changeSalaryHandler}
+                  />
+                </div>
+
                 <button className="btn btn-success" onClick={saveEmployee}>
                   Save
                 </button>
@@ -115,6 +175,8 @@ const CreateEmployee = () => {
             </div>
           </div>
         </div>
+      </div>
+
       </div>
     </>
   );
