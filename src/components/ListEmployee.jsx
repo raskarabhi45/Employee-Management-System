@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
+import "./add_update.css"
 import EmployeeService from "../services/EmployeeService";
 import { useNavigate } from 'react-router-dom';
 
